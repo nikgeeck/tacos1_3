@@ -9,9 +9,9 @@ import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
-@Table("Ingredients")
+@Table
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+//@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class Ingredient implements Persistable<String> {
     @Id
     private final String id;

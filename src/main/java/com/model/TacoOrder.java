@@ -15,13 +15,13 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@Table("Taco_Order")
+@Table("TACOORDER")
 public class TacoOrder implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private long id;
-    @Column("placed_at")
-    private Date placedAt;
+//    @Column("placed_at")
+    private Date placedAt = new Date();
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;
     @NotBlank(message = "Street is required")

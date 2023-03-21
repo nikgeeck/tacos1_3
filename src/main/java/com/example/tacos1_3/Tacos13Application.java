@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.*")
+//@ComponentScan(basePackages = "com.*")
 public class Tacos13Application {
     public static void main(String[] args) {
         SpringApplication.run(Tacos13Application.class, args);
