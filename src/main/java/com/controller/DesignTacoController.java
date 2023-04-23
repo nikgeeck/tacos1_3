@@ -7,14 +7,12 @@ import com.model.TacoOrder;
 import com.repository.IngredientRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Collections;
 import java.util.stream.Collectors;
 
 @Slf4j //добавляет логирование (логер)
@@ -30,12 +28,12 @@ public class DesignTacoController {
 
     @ModelAttribute
     public void addIngredientToModel(Model model) {
-        Iterable<Ingredient> ingredients = ingredientRepository.findAll();
+        List<Ingredient> ingredients = ingredientRepository.findAll();
         Type[] types = Ingredient.Type.values();
 
         for (Type type : types
         ) {
-            model.addAttribute(type.toString().toLowerCase(), filterByType((List<Ingredient>) ingredients, type));
+            model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
         }
     }
 
@@ -56,12 +54,14 @@ public class DesignTacoController {
 
     @PostMapping
     public String processTaco(@Valid Taco taco, Errors errors, @ModelAttribute TacoOrder tacoOrder) {
+//        log.info("ingredients : {}", ingredientRepository.findAll());
         if (errors.hasErrors()) {
             return "design";
         }
 
         tacoOrder.AddTaco(taco);
         log.info("Processing taco: {}", taco);
+
         return "redirect:/order/current";
     }
 
