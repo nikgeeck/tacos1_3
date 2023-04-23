@@ -1,0 +1,36 @@
+
+
+spring:
+  profiles:
+    active:
+      - prod
+      - audit
+      - ha
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: 5e181d81829981561865
+            client-secret: 6c630477573ece9d7158631b6d547b8d5d7f2990
+          scope:
+            - user:email
+            - read:user
+
+
+logging:
+  level:
+    tacos: DEBUG
+
+---
+spring:
+  profile: prod
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tacoCloud
+    username: postgres
+    password: pupochka2517
+
+  logging:
+    level:
+      tacos: WARN

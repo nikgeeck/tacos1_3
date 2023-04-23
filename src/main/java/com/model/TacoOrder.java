@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,10 +16,12 @@ import java.util.List;
 @Data
 @Entity
 public class TacoOrder implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     private Date placedAt = new Date();
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;
@@ -37,8 +40,11 @@ public class TacoOrder implements Serializable {
     private String ccExpiration;
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<Taco> tacoList = new ArrayList<>();
+    @ManyToOne
+    private User user;
 
     public void AddTaco(Taco taco) {
         this.tacoList.add(taco);
